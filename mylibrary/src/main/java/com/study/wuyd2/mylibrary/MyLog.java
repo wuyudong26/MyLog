@@ -1,13 +1,10 @@
-package com.study.wuyudong.wyd.utils;
+package com.study.wuyd2.mylibrary;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.socks.library.KLog;
-import com.study.wuyudong.wyd.app.App;
 
 import java.io.BufferedWriter;
 import java.io.File;

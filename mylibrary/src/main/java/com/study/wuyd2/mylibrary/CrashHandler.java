@@ -1,12 +1,10 @@
-package com.study.wuyudong.wyd.utils;
+package com.study.wuyd2.mylibrary;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
-
-import com.study.wuyudong.wyd.preferences.CrashPreferences;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -93,7 +91,6 @@ public class CrashHandler implements UncaughtExceptionHandler {
         collectDeviceInfo(mContext);
         //保存日志文件
         saveCrashInfo2File(ex);
-        CrashPreferences.saveKeyCrash("true");
         return true;
     }
 
