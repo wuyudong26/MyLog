@@ -23,6 +23,7 @@ import java.util.UUID;
  */
 @SuppressLint("SimpleDateFormat")
 public class MyLog {
+    public static Context mContext;
     /**
      * 全局tag相关
      */
@@ -63,7 +64,7 @@ public class MyLog {
     /**
      * 日志文件的路径
      */
-    public static String MY_LOG_PATH = getFilePath(App.getContext());
+    public static String MY_LOG_PATH;
     /**
      * sd卡中日志文件的最多保存天数
      */
@@ -163,10 +164,15 @@ public class MyLog {
             }
         }
     }
+
+//    public static void setContext(Context context){
+//        mContext=context;
+//    }
     /**
      * 开启打印开关并存到本地
      */
-    public static void initLog(Boolean isMyLogSwitch,Boolean isMyLogPrintSwitch,Boolean isMyLogWriteToFile,int fileNumbers,int filesSize,String filaName,String tag) {
+    public static void initLog(Context context,Boolean isMyLogSwitch,Boolean isMyLogPrintSwitch,Boolean isMyLogWriteToFile,int fileNumbers,int filesSize,String filaName,String tag) {
+        mContext=context.getApplicationContext();
         MY_LOG_SWITCH=isMyLogSwitch;
         MY_LOG_PRINT_SWITCH=isMyLogPrintSwitch;
         MY_LOG_WRITE_TO_FILE = isMyLogWriteToFile;
@@ -175,18 +181,23 @@ public class MyLog {
         FILE_NAME=filaName;
         mGlobalTag = tag;
         mIsGlobalTagEmpty = TextUtils.isEmpty(mGlobalTag);
+        MY_LOG_PATH=getFilePath(mContext);
     }
-    public static void initLog(Boolean isMyLogSwitch,String tag){
+    public static void initLog(Context context,Boolean isMyLogSwitch,String tag){
+        mContext=context.getApplicationContext();
         MY_LOG_SWITCH=isMyLogSwitch;
         MY_LOG_PRINT_SWITCH=isMyLogSwitch;
         MY_LOG_WRITE_TO_FILE=isMyLogSwitch;
         mGlobalTag = tag;
         mIsGlobalTagEmpty = TextUtils.isEmpty(mGlobalTag);
+        MY_LOG_PATH=getFilePath(mContext);
     }
-    public static void initLog(Boolean isMyLogSwitch){
+    public static void initLog(Context context,Boolean isMyLogSwitch){
+        mContext=context.getApplicationContext();
         MY_LOG_SWITCH=isMyLogSwitch;
         MY_LOG_PRINT_SWITCH=isMyLogSwitch;
         MY_LOG_WRITE_TO_FILE=isMyLogSwitch;
+        MY_LOG_PATH=getFilePath(mContext);
     }
 
     /**
@@ -195,7 +206,7 @@ public class MyLog {
      * @return className, methodName, lineNumber
      */
     private static String[] infos() {
-        getFilePath(App.getContext());
+        getFilePath(mContext);
         String[] infos = new String[]{"", "", ""};
         StackTraceElement element = new Throwable().getStackTrace()[3];
         String className=element.getClassName();
